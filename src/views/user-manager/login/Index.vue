@@ -29,10 +29,6 @@
         <h3 class="title">
           {{ t("login.title") }}
         </h3>
-        <LangSelect
-          :isWhite="true"
-          class="set-language"
-        />
       </div>
 
       <el-form-item prop="username">
@@ -136,7 +132,6 @@ import {
   nextTick,
   toRefs
 } from 'vue'
-import LangSelect from '@/components/lang_select/Index.vue'
 import SocialSign from './components/SocialSignin.vue'
 import { isValidUsername } from '@/utils/validate'
 import { useRoute, LocationQuery, useRouter } from 'vue-router'
@@ -145,7 +140,6 @@ import { UserActionTypes } from '@/store/modules/user/action-types'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
   components: {
-    LangSelect,
     SocialSign
   },
   setup() {
@@ -361,15 +355,6 @@ export default defineComponent({
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;
-    }
-
-    .set-language {
-      color: #fff;
-      position: absolute;
-      top: 3px;
-      font-size: 18px;
-      right: 0px;
-      cursor: pointer;
     }
   }
 

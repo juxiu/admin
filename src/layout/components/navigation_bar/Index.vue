@@ -1,9 +1,5 @@
 <!--
  * @Description: 导航栏
- * @Author: ZY
- * @Date: 2020-12-17 15:52:19
- * @LastEditors: ZY
- * @LastEditTime: 2021-01-27 19:16:50
 -->
 <template>
   <div class="navbar">
@@ -18,18 +14,6 @@
       class="breadcrumb-container"
     />
     <div class="right-menu">
-      <template v-if="device !== 'mobile'">
-        <!-- <error-log class="errLog-container right-menu-item hover-effect" /> -->
-        <Screenfull class="right-menu-item hover-effect" />
-        <el-tooltip
-          :content="t('navbar.size')"
-          effect="dark"
-          placement="bottom"
-        >
-          <SizeSelect class="right-menu-item hover-effect" />
-        </el-tooltip>
-        <LangSelect class="right-menu-item hover-effect" />
-      </template>
       <el-dropdown
         class="avatar-container right-menu-item hover-effect"
         trigger="click"
@@ -42,36 +26,17 @@
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <router-link to="/profile/">
-              <el-dropdown-item>
-                {{ t("navbar.profile") }}
-              </el-dropdown-item>
-            </router-link>
             <router-link to="/">
               <el-dropdown-item>
-                {{ t("navbar.dashboard") }}
+                123
               </el-dropdown-item>
             </router-link>
-            <a
-              target="_blank"
-              href="https://github.com/rcyj-FED/vue3-composition-admin"
-            >
-              <el-dropdown-item>
-                {{ t("navbar.github") }}
-              </el-dropdown-item>
-            </a>
-            <a
-              target="_blank"
-              href="https://armour.github.io/vue-typescript-admin-docs/"
-            >
-              <el-dropdown-item>Docs</el-dropdown-item>
-            </a>
             <el-dropdown-item
               divided
               @click="logout"
             >
               <span style="display:block;">
-                {{ t("navbar.logOut") }}
+                退出登录
               </span>
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -84,34 +49,23 @@
 <script>
 import BreadCrumb from '@/components/bread-crumb/Index.vue'
 import Hamburger from '@/components/hamburger/Index.vue'
-import Screenfull from '@/components/screenfull/Index.vue'
-import LangSelect from '@/components/lang_select/Index.vue'
-import SizeSelect from '@/components/size_select/Index.vue'
 
 import { computed, reactive, toRefs } from 'vue'
 import { useStore } from '@/store'
 import { AppActionTypes } from '@/store/modules/app/action-types'
-import { useI18n } from 'vue-i18n'
 import { UserActionTypes } from '@/store/modules/user/action-types'
 import { useRoute, useRouter } from 'vue-router'
 export default {
   components: {
     BreadCrumb,
     Hamburger,
-    Screenfull,
-    LangSelect,
-    SizeSelect
   },
   setup() {
     const store = useStore()
     const route = useRoute()
     const router = useRouter()
-    const { t } = useI18n()
     const sidebar = computed(() => {
       return store.state.app.sidebar
-    })
-    const device = computed(() => {
-      return store.state.app.device.toString()
     })
     const avatar = computed(() => {
       return store.state.user.avatar
@@ -129,10 +83,9 @@ export default {
     })
     return {
       sidebar,
-      device,
       avatar,
       ...toRefs(state),
-      t
+      
     }
   }
 }
