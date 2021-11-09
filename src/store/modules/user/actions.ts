@@ -48,7 +48,8 @@ export const actions: ActionTree<UserState, RootState> & Actions = {
     { commit }: AugmentedActionContext,
     userInfo: { username: string, password: string }
   ) {
-    let { username, password } = userInfo
+    let { username} = userInfo
+    const {password} =userInfo
     username = username.trim()
     await loginRequest({ username, password }).then(async(res) => {
       if (res?.code === 0 && res.data.accessToken) {

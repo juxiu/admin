@@ -1,10 +1,3 @@
-<!--
- * @Description: app 布局入口
- * @Author: ZY
- * @Date: 2020-12-17 15:32:33
- * @LastEditors: SCY
- * @LastEditTime: 2021-04-06 14:47:00
--->
 <template>
   <div
     :class="classObj"
@@ -25,9 +18,6 @@
         <TagsView v-if="showTagsView" />
       </div>
       <AppMain />
-      <RightPanel v-if="showSettings">
-        <Settings />
-      </RightPanel>
     </div>
   </div>
 </template>
@@ -35,24 +25,19 @@
 <script lang="ts">
 import { DeviceType } from '@/store/modules/app/state'
 import { computed, defineComponent, onBeforeMount, onBeforeUnmount, onMounted, reactive, toRefs } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { useStore } from '@/store'
 import { AppActionTypes } from '@/store/modules/app/action-types'
-import { AppMain, Navbar, Settings, TagsView, Sidebar } from './components'
-import RightPanel from '@/components/right_panel/Index.vue'
+import { AppMain, Navbar, TagsView, Sidebar } from './components'
 import resize from './resize'
 export default defineComponent({
   name: 'Layout',
   components: {
     AppMain,
     Navbar,
-    RightPanel,
-    Settings,
     Sidebar,
     TagsView
   },
   setup() {
-    const { t } = useI18n()
     const store = useStore()
     const { sidebar, device, addEventListenerOnResize, resizeMounted, removeEventListenerResize, watchRouter } = resize()
     const state = reactive({
@@ -93,7 +78,6 @@ export default defineComponent({
       removeEventListenerResize()
     })
     return {
-      t,
       classObj,
       sidebar,
       showSettings,
