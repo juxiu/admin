@@ -18,11 +18,11 @@
         <span
           v-if="item.redirect === 'noredirect' || index === breadcrumbs.length-1"
           class="no-redirect"
-        >{{ t('route.' + item.meta.title) }}</span>
+        >{{ item.meta.title }}</span>
         <a
           v-else
           @click.prevent="handleLink(item)"
-        >{{ t('route.' + item.meta.title) }}</a>
+        >{{ item.meta.title }}</a>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
@@ -32,7 +32,6 @@
 import { defineComponent, onBeforeMount, reactive, toRefs, watch } from 'vue'
 import { useRoute, RouteLocationMatched } from 'vue-router'
 import { compile } from 'path-to-regexp'
-import { useI18n } from 'vue-i18n'
 import router from '@/router'
 export default defineComponent({
   setup() {
@@ -43,7 +42,6 @@ export default defineComponent({
       return toPath(params)
     }
 
-    const { t } = useI18n()
     const state = reactive({
       breadcrumbs: [] as Array<RouteLocationMatched>,
       getBreadcrumb: () => {
@@ -89,7 +87,6 @@ export default defineComponent({
     })
 
     return {
-      t,
       ...toRefs(state)
     }
   }

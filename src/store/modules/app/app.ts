@@ -7,7 +7,6 @@
  */
 import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators'
 import { getSidebarStatus, getSize, setSidebarStatus, setLanguage, setSize } from '@/utils/cookies'
-import { getLocale } from '@/locales'
 import { store } from '@/store'
 
 export enum DeviceType {
@@ -21,7 +20,6 @@ export interface AppState {
     opened: boolean
     withoutAnimation: boolean
   }
-  language: string
   size: string
 }
 
@@ -33,7 +31,7 @@ class App extends VuexModule implements AppState {
   }
 
   public device = DeviceType.Desktop
-  public language = getLocale()
+  // public language = getLocale()
   public size = getSize() || 'medium'
 
   @Mutation
@@ -59,11 +57,11 @@ class App extends VuexModule implements AppState {
     this.device = device
   }
 
-  @Mutation
-  private SET_LANGUAGE(language: string) {
-    this.language = language
-    setLanguage(this.language)
-  }
+  // @Mutation
+  // private SET_LANGUAGE(language: string) {
+  //   this.language = language
+  //   setLanguage(this.language)
+  // }
 
   @Mutation
   private SET_SIZE(size: string) {
@@ -86,10 +84,10 @@ class App extends VuexModule implements AppState {
     this.TOGGLE_DEVICE(device)
   }
 
-  @Action
-  public SetLanguage(language: string) {
-    this.SET_LANGUAGE(language)
-  }
+  // @Action
+  // public SetLanguage(language: string) {
+  //   this.SET_LANGUAGE(language)
+  // }
 
   @Action
   public SetSize(size: string) {

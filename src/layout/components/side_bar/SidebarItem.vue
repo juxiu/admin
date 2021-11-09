@@ -34,7 +34,7 @@
             <use :xlink:href="theOnlyOneChild.meta.icon" />
           </svg>
           <span v-if="theOnlyOneChild.meta.title">{{
-            t("route." + theOnlyOneChild.meta.title)
+            theOnlyOneChild.meta.title
           }}</span>
         </el-menu-item>
       </SidebarItemLink>
@@ -54,7 +54,7 @@
           <use :xlink:href="item.meta.icon" />
         </svg>
         <span v-if="item.meta && item.meta.title">{{
-          t("route." + item.meta.title)
+          item.meta.title
         }}</span>
       </template>
       <template v-if="item.children">
@@ -78,7 +78,6 @@ import { computed, defineComponent, PropType } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import { isExternal } from '@/utils/validate'
 import SidebarItemLink from './SidebarItemLink.vue'
-import { useI18n } from 'vue-i18n'
 export default defineComponent({
   props: {
     item: {
@@ -149,10 +148,8 @@ export default defineComponent({
       }
       return path.resolve(props.basePath, routePath)
     }
-    const { t } = useI18n()
 
     return {
-      t,
       alwaysShowRootMenu,
       showingChildNumber,
       theOnlyOneChild,

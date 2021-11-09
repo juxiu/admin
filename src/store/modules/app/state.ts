@@ -6,7 +6,6 @@
  * @LastEditTime: 2020-12-23 10:30:35
  */
 import { getSidebarStatus, getSize } from '@/utils/cookies'
-import { getLocale } from '@/locales'
 
 export enum DeviceType {
   Mobile,
@@ -19,7 +18,6 @@ export interface AppState {
     opened: boolean
     withoutAnimation: boolean
   }
-  language: string
   size: string
 }
 
@@ -29,6 +27,5 @@ export const state: AppState = {
     opened: getSidebarStatus() !== 'closed',
     withoutAnimation: false
   },
-  language: getLocale(),
   size: getSize() || 'medium'
 }

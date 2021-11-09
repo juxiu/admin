@@ -32,10 +32,6 @@ export interface Actions {
     { commit }: AugmentedActionContext,
     device: DeviceType
   ): void
-  [AppActionTypes.ACTION_SET_LANGUAGE](
-    { commit }: AugmentedActionContext,
-    language: string
-  ): void
   [AppActionTypes.ACTION_SET_SIZE](
     { commit }: AugmentedActionContext,
     size: string
@@ -51,9 +47,6 @@ export const actions: ActionTree<AppState, RootState> & Actions = {
   },
   [AppActionTypes.ACTION_TOGGLE_DEVICE]({ commit }, device: DeviceType) {
     commit(AppMutationTypes.TOGGLE_DEVICE, device)
-  },
-  [AppActionTypes.ACTION_SET_LANGUAGE]({ commit }, language: string) {
-    commit(AppMutationTypes.SET_LANGUAGE, language)
   },
   [AppActionTypes.ACTION_SET_SIZE]({ commit }, size: string) {
     commit(AppMutationTypes.SET_SIZE, size)

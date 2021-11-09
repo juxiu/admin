@@ -27,7 +27,7 @@
     >
       <div class="title-container">
         <h3 class="title">
-          {{ t("login.title") }}
+          系统登录
         </h3>
       </div>
 
@@ -38,7 +38,7 @@
         <el-input
           ref="userNameRef"
           v-model="loginForm.username"
-          :placeholder="t('login.username')"
+          placeholder="账号"
           name="username"
           type="text"
           tabindex="1"
@@ -61,7 +61,7 @@
             ref="passwordRef"
             v-model="loginForm.password"
             :type="passwordType"
-            :placeholder="t('login.password')"
+            placeholder="密码"
             name="password"
             tabindex="2"
             autocomplete="on"
@@ -86,17 +86,17 @@
         style="width:100%; margin-bottom:30px;"
         @click.prevent="handleLogin"
       >
-        {{ t("login.logIn") }}
+        登录
       </el-button>
 
       <div style="position:relative">
         <div class="tips">
-          <span>{{ t("login.username") }} : admin </span>
-          <span>{{ t("login.password") }} : {{ t("login.any") }} </span>
+          <span>账号 : admin </span>
+          <span>密码 : 随便填 </span>
         </div>
         <div class="tips">
-          <span>{{ t("login.username") }} : editor </span>
-          <span>{{ t("login.password") }} : {{ t("login.any") }} </span>
+          <span>账号 : editor </span>
+          <span>密码 : 随便填 </span>
         </div>
 
         <el-button
@@ -104,16 +104,16 @@
           type="primary"
           @click="showDialog = true"
         >
-          {{ t("login.thirdparty") }}
+          第三方登录
         </el-button>
       </div>
     </el-form>
 
     <el-dialog
-      :title="t('login.thirdparty')"
+      title="第三方登录"
       v-model="showDialog"
     >
-      {{ t("login.thirdpartyTips") }}
+      本地不能模拟，请结合自己业务进行模拟！！！
       <br>
       <br>
       <br>
@@ -137,7 +137,6 @@ import { isValidUsername } from '@/utils/validate'
 import { useRoute, LocationQuery, useRouter } from 'vue-router'
 import { useStore } from '@/store'
 import { UserActionTypes } from '@/store/modules/user/action-types'
-import { useI18n } from 'vue-i18n'
 export default defineComponent({
   components: {
     SocialSign
@@ -149,7 +148,6 @@ export default defineComponent({
     const router = useRouter()
     const route = useRoute()
     const store = useStore()
-    const { t } = useI18n()
     const state = reactive({
       loginForm: {
         username: 'admin',
@@ -251,7 +249,6 @@ export default defineComponent({
       loginFormRef,
       ...toRefs(state),
       ...toRefs(methods),
-      t
     }
   }
 })
