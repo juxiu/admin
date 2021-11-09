@@ -7,11 +7,9 @@
 -->
 <template>
   <div
-    :class="{'has-logo': showLogo}"
-    class="sideWrap"
+    class="sideWrap has-logo"
   >
     <SidebarLogo
-      v-if="showLogo"
       :collapse="isCollapse"
     />
     <el-scrollbar wrap-class="scrollbar-wrapper">
@@ -21,7 +19,7 @@
         :default-active="activeMenu"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
-        :active-text-color="menuActiveTextColor"
+        active-text-color="#57CAEB"
         mode="vertical"
       >
         <SidebarItem
@@ -58,20 +56,6 @@ export default defineComponent({
     const routes = computed(() => {
       return store.state.permission.routes
     })
-    const showLogo = computed(() => {
-      return store.state.settings.showSidebarLogo
-    })
-
-    const menuActiveTextColor = computed(() => {
-      console.log(store.state.settings.sidebarTextTheme)
-
-      if (store.state.settings.sidebarTextTheme) {
-        return '#57CAEB'
-        // return store.state.settings.theme
-      } else {
-        return variables.menuActiveText
-      }
-    })
 
     const activeMenu = computed(() => {
       const { meta, path } = route
@@ -90,8 +74,6 @@ export default defineComponent({
     return {
       sidebar,
       routes,
-      showLogo,
-      menuActiveTextColor,
       variables,
       activeMenu,
       isCollapse

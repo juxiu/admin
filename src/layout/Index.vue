@@ -10,12 +10,11 @@
     />
     <Sidebar class="sidebar-container" />
     <div
-      :class="{hasTagsView: showTagsView}"
-      class="main-container"
+      class="main-container hasTagsView"
     >
-      <div :class="{'fixed-header': fixedHeader}">
+      <div>
         <Navbar />
-        <TagsView v-if="showTagsView" />
+        <TagsView />
       </div>
       <AppMain />
     </div>
@@ -55,16 +54,6 @@ export default defineComponent({
       }
     })
 
-    const showSettings = computed(() => {
-      return store.state.settings.showSettings
-    })
-    const showTagsView = computed(() => {
-      return store.state.settings.showTagsView
-    })
-    const fixedHeader = computed(() => {
-      return store.state.settings.fixedHeader
-    })
-
     watchRouter()
     onBeforeMount(() => {
       addEventListenerOnResize()
@@ -80,9 +69,6 @@ export default defineComponent({
     return {
       classObj,
       sidebar,
-      showSettings,
-      showTagsView,
-      fixedHeader,
       ...toRefs(state)
     }
   }
@@ -128,15 +114,6 @@ export default defineComponent({
   background-color: #ffffff !important;
 }
 
-.fixed-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 9;
-  width: calc(100% - #{$sideBarWidth});
-  transition: width 0.28s;
-}
-
 .hideSidebar {
   .main-container {
     margin-left: 54px;
@@ -146,9 +123,6 @@ export default defineComponent({
     width: 54px !important;
   }
 
-  .fixed-header {
-    width: calc(100% - 54px)
-  }
 }
 
 /* for mobile response 适配移动端 */
@@ -175,9 +149,6 @@ export default defineComponent({
     }
   }
 
-  .fixed-header {
-    width: 100%;
-  }
 }
 
 .withoutAnimation {
