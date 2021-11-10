@@ -8,7 +8,6 @@
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-// import { useI18n } from 'vue-i18n'
 import router from '@/router'
 import { RouteLocationNormalized } from 'vue-router'
 import { useStore } from './store'
@@ -16,19 +15,7 @@ import { UserActionTypes } from './store/modules/user/action-types'
 import { PermissionActionType } from './store/modules/permission/action-types'
 import { ElMessage } from 'element-plus'
 import whiteList from './config/default/whitelist'
-// import settings from '@/config/default/setting.config'
 NProgress.configure({ showSpinner: false })
-
-// const getPageTitle = (key: string) => {
-//   const i18n = useI18n()
-//   const title = settings.title
-//   const hasKey = i18n.te(`route.${key}`)
-//   if (hasKey) {
-//     const pageName = i18n.t(`route.${key}`)
-//     return `${pageName} - ${title}`
-//   }
-//   return `${title}`
-// }
 
 router.beforeEach(async(to: RouteLocationNormalized, _: RouteLocationNormalized, next: any) => {
   // Start progress bar
@@ -45,6 +32,7 @@ router.beforeEach(async(to: RouteLocationNormalized, _: RouteLocationNormalized,
       if (store.state.user.roles.length === 0) {
         try {
           // Note: roles must be a object array! such as: ['admin'] or ['developer', 'editor']
+          // 获取用户信息
           await store.dispatch(UserActionTypes.ACTION_GET_USER_INFO, undefined)
           const roles = store.state.user.roles
           // Generate accessible routes map based on role
@@ -70,7 +58,6 @@ router.beforeEach(async(to: RouteLocationNormalized, _: RouteLocationNormalized,
   } else {
     // Has no token
     if (whiteList.indexOf(to.path) !== -1) {
-      // In the free login whitelist, go directly
       next()
     } else {
       // Other pages that do not have permission to access are redirected to the login page.

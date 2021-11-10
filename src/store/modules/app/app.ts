@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-01-16 16:01:31
  */
 import { VuexModule, Module, Mutation, Action, getModule } from 'vuex-module-decorators'
-import { getSidebarStatus, getSize, setSidebarStatus, setLanguage, setSize } from '@/utils/cookies'
+import { getSidebarStatus, getSize, setSidebarStatus, setSize } from '@/utils/cookies'
 import { store } from '@/store'
 
 export enum DeviceType {
@@ -56,12 +56,6 @@ class App extends VuexModule implements AppState {
   private TOGGLE_DEVICE(device: DeviceType) {
     this.device = device
   }
-
-  // @Mutation
-  // private SET_LANGUAGE(language: string) {
-  //   this.language = language
-  //   setLanguage(this.language)
-  // }
 
   @Mutation
   private SET_SIZE(size: string) {

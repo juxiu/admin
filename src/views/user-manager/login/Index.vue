@@ -195,11 +195,13 @@ export default defineComponent({
         (loginFormRef.value as any).validate(async(valid: boolean) => {
           if (valid) {
             state.loading = true
+            console.log('----state',state)
             await store.dispatch(UserActionTypes.ACTION_LOGIN, state.loginForm)
             router
               .push({
-                path: state.redirect || '/',
-                query: state.otherQuery
+                path: '/dashboard',
+                // path: state.redirect || '/',
+                // query: state.otherQuery
               })
               .catch(err => {
                 console.warn(err)

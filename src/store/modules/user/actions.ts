@@ -51,16 +51,22 @@ export const actions: ActionTree<UserState, RootState> & Actions = {
     let { username} = userInfo
     const {password} =userInfo
     username = username.trim()
-    await loginRequest({ username, password }).then(async(res) => {
-      if (res?.code === 0 && res.data.accessToken) {
+    // 自己测试用 写死token 
+    setTimeout(() => {
+      const res = {data:{accessToken: "admin-token"}}
         setToken(res.data.accessToken)
         commit(UserMutationTypes.SET_TOKEN, res.data.accessToken)
-      }
-    }).catch((err) => {
-      console.log(err)
-    })
+    }, 1000);
+    
+    // await loginRequest({ username, password }).then(async(res) => {
+    //   if (res?.code === 0 && res.data.accessToken) {
+    //     setToken(res.data.accessToken)
+    //     commit(UserMutationTypes.SET_TOKEN, res.data.accessToken)
+    //   }
+    // }).catch((err) => {
+    //   console.log(err)
+    // })
   },
-
   [UserActionTypes.ACTION_RESET_TOKEN](
     { commit }: AugmentedActionContext) {
     removeToken()
@@ -74,18 +80,31 @@ export const actions: ActionTree<UserState, RootState> & Actions = {
     if (state.token === '') {
       throw Error('token is undefined!')
     }
-    await userInfoRequest().then((res) => {
-      if (res?.code === 0) {
+    // await userInfoRequest().then((res) => {
+    //   if (res?.code === 0) {
+      const res = {
+        data:{
+          avatar: "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
+          email: "admin@test.com",
+          id: 0,
+          introduction: "I am a super administrator",
+          name: "Super Admin",
+          password: "any",
+          phone: "1234567890",
+          roles: ["admin"],
+          username: "admin"
+        }
+      }
         commit(UserMutationTypes.SET_ROLES, res.data.roles)
         commit(UserMutationTypes.SET_NAME, res.data.name)
         commit(UserMutationTypes.SET_AVATAR, res.data.avatar)
         commit(UserMutationTypes.SET_INTRODUCTION, res.data.introduction)
         commit(UserMutationTypes.SET_EMAIL, res.data.email)
         return res
-      } else {
-        throw Error('Verification failed, please Login again.')
-      }
-    })
+    //   } else {
+    //     throw Error('Verification failed, please Login again.')
+    //   }
+    // })
   },
 
   async [UserActionTypes.ACTION_CHANGE_ROLES](

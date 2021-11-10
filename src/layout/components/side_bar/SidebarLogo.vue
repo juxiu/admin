@@ -43,7 +43,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import settings from '@/config/default/setting.config'
 import Logo from '@/assets/images/home/logo.png'
 export default defineComponent({
   props: {
@@ -53,9 +52,7 @@ export default defineComponent({
     }
   },
   setup() {
-    const title = settings.title
     return {
-      title,
       Logo
     }
   }

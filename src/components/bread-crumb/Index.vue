@@ -1,9 +1,5 @@
 <!--
  * @Description: 面包屑组件
- * @Author: ZY
- * @Date: 2020-12-22 11:02:14
- * @LastEditors: ZY
- * @LastEditTime: 2021-01-28 16:28:40
 -->
 <template>
   <el-breadcrumb
@@ -22,7 +18,7 @@
         <a
           v-else
           @click.prevent="handleLink(item)"
-        >{{ item.meta.title }}</a>
+        >{{ item.meta.title + 'link' }}</a>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>

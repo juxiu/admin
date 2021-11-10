@@ -3,11 +3,6 @@
     :class="classObj"
     class="app-wrapper"
   >
-    <div
-      v-if="classObj.mobile && sidebar.opened"
-      class="drawer-bg"
-      @click="handleClickOutside"
-    />
     <Sidebar class="sidebar-container" />
     <div
       class="main-container hasTagsView"
@@ -22,10 +17,7 @@
 </template>
 
 <script lang="ts">
-import { DeviceType } from '@/store/modules/app/state'
-import { computed, defineComponent, onBeforeMount, onBeforeUnmount, onMounted, reactive, toRefs } from 'vue'
-import { useStore } from '@/store'
-import { AppActionTypes } from '@/store/modules/app/action-types'
+import { computed, defineComponent, onBeforeMount, onBeforeUnmount, onMounted, } from 'vue'
 import { AppMain, Navbar, TagsView, Sidebar } from './components'
 import resize from './resize'
 export default defineComponent({
@@ -37,20 +29,12 @@ export default defineComponent({
     TagsView
   },
   setup() {
-    const store = useStore()
-    const { sidebar, device, addEventListenerOnResize, resizeMounted, removeEventListenerResize, watchRouter } = resize()
-    const state = reactive({
-      handleClickOutside: () => {
-        store.dispatch(AppActionTypes.ACTION_CLOSE_SIDEBAR, false)
-      }
-    })
+    const { sidebar,addEventListenerOnResize, resizeMounted, removeEventListenerResize, watchRouter } = resize()
 
     const classObj = computed(() => {
       return {
         hideSidebar: !sidebar.value.opened,
         openSidebar: sidebar.value.opened,
-        withoutAnimation: sidebar.value.withoutAnimation,
-        mobile: device.value === DeviceType.Mobile
       }
     })
 
@@ -69,7 +53,6 @@ export default defineComponent({
     return {
       classObj,
       sidebar,
-      ...toRefs(state)
     }
   }
 })
@@ -81,16 +64,6 @@ export default defineComponent({
   position: relative;
   height: 100%;
   width: 100%;
-}
-
-.drawer-bg {
-  background: #000;
-  opacity: 0.3;
-  width: 100%;
-  top: 0;
-  height: 100%;
-  position: absolute;
-  z-index: 999;
 }
 
 .main-container {
