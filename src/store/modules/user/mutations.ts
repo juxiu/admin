@@ -21,6 +21,7 @@ export type Mutations<S = UserState> = {
 export const mutations: MutationTree<UserState> & Mutations = {
   [UserMutationTypes.SET_TOKEN](state: UserState, token: string) {
     state.token = token
+    console.log()
   },
 
   [UserMutationTypes.SET_NAME](state: UserState, name: string) {
