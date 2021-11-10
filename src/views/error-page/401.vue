@@ -1,10 +1,3 @@
-<!--
- * @Description:
- * @Autor: scy😊
- * @Date: 2021-01-15 13:50:15
- * @LastEditors: ZY
- * @LastEditTime: 2021-01-26 08:49:38
--->
 <template>
   <div class="errPage-container">
     <el-button
@@ -31,9 +24,6 @@
             <router-link to="/dashboard">
               回首页
             </router-link>
-          </li>
-          <li class="link-type">
-            <a href="https://github.com/rcyj-FED">随便看看</a>
           </li>
           <li>
             <a
